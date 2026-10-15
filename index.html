@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clef — A Musical Metroidvania</title>
+    <link rel="icon" type="image/svg+xml" href="assets/FClef.svg">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Tailwind Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        parchment: {
+                            50: '#FAF8F5',
+                            100: '#F4EFEB',
+                            200: '#E8E1D9',
+                            300: '#D5CCC1',
+                            800: '#3A3735',
+                            900: '#232120'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Modular Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#E8E1D9]">
+
+    <!-- Top Navigation -->
+    <header class="w-full border-b border-parchment-200 bg-parchment-50/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Logo / Brand -->
+            <a href="#" onclick="event.preventDefault(); router('home')" class="flex items-center gap-2 group cursor-pointer">
+                <img src="assets/FClef.svg" alt="Nav Clef Logo" class="h-11 w-auto">
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase font-medium text-parchment-800">
+                <a href="#" onclick="event.preventDefault(); router('home')" id="nav-home" class="hover:text-black transition border-b-2 border-black pb-1">Home</a>
+                <a href="#" onclick="event.preventDefault(); router('devlogs')" id="nav-devlogs" class="hover:text-black transition pb-1">Dev Log</a>
+                <a href="#" onclick="event.preventDefault(); router('about')" id="nav-about" class="hover:text-black transition pb-1">About</a>
+            </nav>
+
+            <!-- CTA / Action -->
+            <div class="flex items-center gap-3">
+                <a href="#demo" onclick="event.preventDefault(); router('home'); setTimeout(() => document.getElementById('demo').scrollIntoView({behavior: 'smooth'}), 50);" class="border border-parchment-900 px-4 py-2 text-xs font-medium tracking-widest uppercase rounded hover:bg-parchment-900 hover:text-parchment-50 transition shadow-sm">
+                    Play Demo
+                </a>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button onclick="toggleMobileMenu()" id="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false" class="md:hidden p-2 -mr-2 text-parchment-900">
+                    <svg id="mobile-menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg id="mobile-menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden border-t border-parchment-200 px-6 py-4 flex flex-col gap-4 text-sm tracking-widest uppercase font-medium text-parchment-800">
+            <a href="#" onclick="event.preventDefault(); router('home')" id="nav-home-mobile" class="hover:text-black transition">Home</a>
+            <a href="#" onclick="event.preventDefault(); router('devlogs')" id="nav-devlogs-mobile" class="hover:text-black transition">Dev Log</a>
+            <a href="#" onclick="event.preventDefault(); router('about')" id="nav-about-mobile" class="hover:text-black transition">About</a>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-6 py-10">
+
+        <!-- VIEW: HOME -->
+        <div id="view-home" class="space-y-16">
+            <!-- Hero Section -->
+            <section class="text-center space-y-4 max-w-2xl mx-auto pt-2">
+                <div class="flex justify-center">
+                    <!-- Hero SVG Emblem -->
+                    <img src="assets/ClefLogo.svg" alt="Main Clef Logo" class="w-40 md:w-48">
+                </div>
+                <div class="space-y-4">
+                    <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-parchment-900 leading-tight">
+                        A resonant metroidvania lite where every strike conducts the symphony of a fallen world.
+                    </h1>
+                    <p class="text-parchment-800/80 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+                      Step into the shattered world of Clavis. As the last known Conductor, wield your baton
+                      and light string to fight back against the creatures of dissonance.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Playable Demonstration Section -->
+            <section id="demo" class="space-y-6 pt-6">
+                <div class="flex items-center justify-between text-xs tracking-widest uppercase font-mono text-parchment-800 border-b border-parchment-200 pb-2">
+                    <span>PLAYABLE DEMO</span>
+                </div>
+
+                <!-- Blocked Out Game Frame -->
+                <div class="relative w-full aspect-video bg-parchment-900 rounded-lg overflow-hidden shadow-xl border border-parchment-300 flex flex-col items-center justify-center group">
+                    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#E8E1D9_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+                    <div class="relative z-10 text-center space-y-4 px-4">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-parchment-50/10 border border-parchment-50/30 flex items-center justify-center text-parchment-50 shadow-inner">
+                            <svg class="w-8 h-8 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-serif text-xl text-parchment-50 font-medium">Playable Demonstration Blocked Out</h3>
+                            <p class="text-xs text-parchment-300 font-mono tracking-wide">WebGL client container initialized. Click below to load build.</p>
+                        </div>
+                        <button onclick="launchDemoStub()" class="px-6 py-2.5 bg-parchment-50 text-parchment-900 text-xs font-bold tracking-widest uppercase rounded hover:bg-parchment-200 transition shadow">
+                            Initialize Web Build
+                        </button>
+                    </div>
+
+                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end text-parchment-50/60 font-mono text-[10px] uppercase pointer-events-none select-none">
+                        <div class="flex gap-4">
+                            <span>HP: 100 / 100</span>
+                            <span>PITCH: A4</span>
+                        </div>
+                        <div>TEMPO: 120 BPM</div>
+                    </div>
+                </div>
+
+                <!-- Controls Guide Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono text-parchment-800 pt-2">
+                    <div class="bg-parchment-100 p-3 rounded border border-parchment-200 flex items-center justify-between">
+                        <span class="text-parchment-800/70">Move / Aim</span>
+                        <span class="font-bold bg-parchment-50 px-2 py-1 rounded border border-parchment-200">A / D or Left Stick</span>
+                    </div>
+                    <div class="bg-parchment-100 p-3 rounded border border-parchment-200 flex items-center justify-between">
+                        <span class="text-parchment-800/70">Strike</span>
+                        <span class="font-bold bg-parchment-50 px-2 py-1 rounded border border-parchment-200">J / Left Click</span>
+                    </div>
+                    <div class="bg-parchment-100 p-3 rounded border border-parchment-200 flex items-center justify-between">
+                        <span class="text-parchment-800/70">Pitch Shift</span>
+                        <span class="font-bold bg-parchment-50 px-2 py-1 rounded border border-parchment-200">Shift + Space</span>
+                    </div>
+                    <div class="bg-parchment-100 p-3 rounded border border-parchment-200 flex items-center justify-between">
+                        <span class="text-parchment-800/70">Parry / Resonance</span>
+                        <span class="font-bold bg-parchment-50 px-2 py-1 rounded border border-parchment-200">K / Right Click</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download / Desktop Releases Section -->
+            <section class="space-y-6 pt-10 border-t border-parchment-200">
+                <div class="space-y-1">
+                    <h3 class="font-serif text-2xl text-parchment-900">Desktop Releases</h3>
+                    <p class="text-sm text-parchment-800/80">Downloadable offline builds featuring uncompressed spatial audio stems, extended graphical scale, and controller support.</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-white p-5 rounded-lg border border-parchment-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm hover:border-parchment-300 transition">
+                        <div>
+                            <div class="font-serif font-medium text-lg text-parchment-900">Windows 64-bit</div>
+                            <div class="text-xs text-parchment-800/60 font-mono mt-0.5">DirectX 12 Universal • Size: 842 MB</div>
+                        </div>
+                        <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                            <span class="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">v0.94 STABLE</span>
+                            <button onclick="stubDownload('Windows 64-bit')" class="px-5 py-2 bg-parchment-900 text-parchment-50 text-xs font-medium tracking-widest uppercase rounded hover:bg-parchment-800 transition">
+                                Download .zip
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg border border-parchment-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm hover:border-parchment-300 transition">
+                        <div>
+                            <div class="font-serif font-medium text-lg text-parchment-900">macOS Universal</div>
+                            <div class="text-xs text-parchment-800/60 font-mono mt-0.5">Apple Silicon & Intel • Size: 890 MB</div>
+                        </div>
+                        <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                            <span class="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">v0.94 STABLE</span>
+                            <button onclick="stubDownload('macOS Universal')" class="px-5 py-2 bg-parchment-900 text-parchment-50 text-xs font-medium tracking-widest uppercase rounded hover:bg-parchment-800 transition">
+                                Download .dmg
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg border border-parchment-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm hover:border-parchment-300 transition">
+                        <div>
+                            <div class="font-serif font-medium text-lg text-parchment-900">Linux Standalone</div>
+                            <div class="text-xs text-parchment-800/60 font-mono mt-0.5">Ubuntu / Arch Runtime • Size: 810 MB</div>
+                        </div>
+                        <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                            <span class="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">v0.94 STABLE</span>
+                            <button onclick="stubDownload('Linux Standalone')" class="px-5 py-2 bg-parchment-900 text-parchment-50 text-xs font-medium tracking-widest uppercase rounded hover:bg-parchment-800 transition">
+                                Download .tar.gz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW: DEV LOG INDEX -->
+        <div id="view-devlogs" class="hidden space-y-10">
+            <div class="border-b border-parchment-200 pb-6 text-center space-y-2">
+                <h1 class="font-serif text-3xl md:text-4xl text-parchment-900">Dev Log</h1>
+                <p class="text-sm text-parchment-800/80">Notes and updates on the development of Clef.</p>
+            </div>
+
+            <!-- Dev Log List Container -->
+            <div id="devlogs-container" class="space-y-8">
+                <!-- Populated dynamically via app.js fetching manifest and markdown -->
+            </div>
+        </div>
+
+        <!-- VIEW: SINGLE DEV LOG DETAIL -->
+        <div id="view-devlog-detail" class="hidden space-y-8 max-w-3xl mx-auto">
+            <div>
+                <button onclick="router('devlogs')" class="text-xs font-mono tracking-widest uppercase text-parchment-800 hover:text-black flex items-center gap-2 group transition">
+                    <span class="group-hover:-translate-x-1 transition">&larr;</span> Back to All Dev Logs
+                </button>
+            </div>
+
+            <div id="detail-content" class="markdown-content text-parchment-900 pb-12">
+                <!-- Rendered Markdown Body -->
+            </div>
+        </div>
+
+        <!-- VIEW: ABOUT -->
+        <div id="view-about" class="hidden space-y-12 max-w-2xl mx-auto pt-4">
+            <div class="text-center space-y-3 border-b border-parchment-200 pb-8">
+                <h1 class="font-serif text-4xl md:text-5xl text-parchment-900">The Team</h1>
+            </div>
+
+            <div class="flex flex-col items-center text-center space-y-6">
+                <div class="w-40 h-40 rounded-full bg-parchment-200 border-2 border-parchment-300 overflow-hidden flex items-center justify-center shadow-md">
+                    <img src="/assets/NolanHeadshot.jpg" alt="Nolan Willis Headshot" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-1">
+                    <h3 class="font-serif text-2xl font-medium text-parchment-900">Nolan Willis</h3>
+                    <p class="text-sm font-mono text-parchment-800/70 uppercase">Game Developer</p>
+                </div>
+            </div>
+
+            <div class="space-y-8 text-parchment-800 leading-relaxed font-light text-lg">
+              <div class="space-y-4">
+                <p>
+                  Just me (for now). My journey into gaming started on a beat-up Nintendo 64, playing Knockout
+                  Kings 2000 with my brothers. I always wondered how games worked—how developers built expansive
+                  worlds and enemies that intelligently fought back—from the yarn-covered worlds of Kirby’s Epic
+                  Yarn to the raids of Destiny 2. After playing Overwatch on a club esports team while studying
+                  Computer Science at Syracuse University, I decided to focus my graduate studies on Game
+                  Programming. At DePaul University, I specialized in real-time systems and engine programming
+                  while building projects across Unreal Engine, Unity, and Godot.
+                </p>
+                <p>
+                  After spending over a year running into walls with traditional software job hunts and shelving
+                  too many web development projects, I decided to step back from the applications and build my
+                  own game. Right now, the goal is to craft a solid vertical slice, with hopes of bringing more
+                  developers on board down the road.
+                </p>
+                <p>
+                  Be sure to check out the weekly dev logs to follow along!
+                </p>
+              </div>
+              <div class="space-y-2">
+                <h3 class="font-serif text-2xl text-parchment-900">Favorite Games</h3>
+                <p>
+                  Halo Reach, Battlefield 1, Destiny 2, Ori and the Blind Forest
+                </p>
+              </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-parchment-200 bg-parchment-100/50 py-8 mt-16 text-xs text-parchment-800/70 font-mono">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-6">
+                <a href="#" onclick="event.preventDefault(); router('home')" class="hover:text-parchment-900 transition">Home</a>
+                <a href="#" onclick="event.preventDefault(); router('devlogs')" class="hover:text-parchment-900 transition">Dev Log</a>
+                <a href="#" onclick="event.preventDefault(); router('about')" class="hover:text-parchment-900 transition">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast Popup -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-parchment-900 text-parchment-50 px-4 py-3 rounded-lg shadow-lg text-xs font-mono tracking-wide transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <span id="toast-msg">Action completed.</span>
+    </div>
+
+    <!-- Application Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>

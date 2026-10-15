@@ -1,0 +1,100 @@
+body {
+background-color: #FAF8F5;
+color: #232120;
+font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, .font-serif {
+font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Custom Markdown Content Styling */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+font-family: 'Playfair Display', Georgia, serif;
+font-weight: 700;
+margin-top: 1.5em;
+margin-bottom: 0.5em;
+}
+
+.markdown-content h1 {
+font-size: clamp(1.75rem, 2.1rem + 0.9vw, 2.75rem);
+line-height: 1.15;
+margin-top: 0;
+}
+
+.markdown-content h2 {
+font-size: 1.5rem;
+border-bottom: 1px solid #E8E1D9;
+padding-bottom: 0.3em;
+}
+
+.markdown-content h3 {
+font-size: 1.25rem;
+}
+
+.markdown-content p {
+margin-bottom: 1em;
+line-height: 1.7;
+color: #3A3735;
+}
+
+.markdown-content ul {
+list-style-type: disc;
+padding-left: 1.5rem;
+margin-bottom: 1em;
+}
+
+.markdown-content ol {
+list-style-type: decimal;
+padding-left: 1.5rem;
+margin-bottom: 1em;
+}
+
+.markdown-content li {
+margin-bottom: 0.375rem;
+line-height: 1.6;
+}
+
+.markdown-content pre {
+background-color: #232120;
+color: #F4EFEB;
+padding: 1rem 1.25rem;
+border-radius: 0.375rem;
+overflow-x: auto;
+font-family: 'Fira Code', monospace;
+font-size: 0.875rem;
+margin: 1.5rem 0;
+border: 1px solid #E8E1D9;
+}
+
+.markdown-content code {
+font-family: 'Fira Code', monospace;
+background-color: #E8E1D9;
+padding: 0.2rem 0.4rem;
+border-radius: 0.25rem;
+font-size: 0.875em;
+color: #232120;
+}
+
+.markdown-content pre code {
+background-color: transparent;
+padding: 0;
+color: #F4EFEB;
+}
+
+.markdown-content blockquote {
+border-left: 3px solid #3A3735;
+padding-left: 1rem;
+margin: 1.5rem 0;
+font-style: italic;
+color: #555;
+}
+
+.markdown-content img {
+border-radius: 0.375rem;
+margin: 1.5rem auto;
+max-width: 100%;
+border: 1px solid #E8E1D9;
+}

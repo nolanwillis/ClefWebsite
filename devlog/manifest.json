@@ -1,0 +1,12 @@
+{
+  "devlogs": [
+    {
+      "slug": "devlog_1",
+      "title": "Dev Log #1: Start",
+      "date": "October _, 2026",
+      "author": "Nolan Willis",
+      "image": "assets/devlog-1.jpg",
+      "summary": "The first devlog of many."
+    }
+  ]
+}
