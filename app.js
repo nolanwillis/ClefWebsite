@@ -111,12 +111,20 @@ function showNotification(message) {
   }, 3000);
 }
 
-function launchDemoStub() {
-  showNotification('Web build not published yet — check back soon.');
-}
+function launchDemo() {
+  const frame = document.getElementById('demo-frame');
+  const launcher = document.getElementById('demo-launcher');
+  if (!frame || !launcher) return;
 
-function stubDownload(platform) {
-  showNotification(`${platform} build not published yet — check back soon.`);
+  const iframe = document.createElement('iframe');
+  iframe.src = 'play/index.html';
+  iframe.title = 'Clef web build';
+  iframe.allow = 'autoplay; fullscreen; gamepad';
+  iframe.allowFullscreen = true;
+  iframe.className = 'absolute inset-0 w-full h-full border-0';
+  launcher.remove();
+  frame.appendChild(iframe);
+  iframe.addEventListener('load', () => iframe.focus());
 }
 
 
