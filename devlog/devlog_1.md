@@ -1,6 +1,6 @@
 # Dev Log #1: Start
 
-*Published on October _, 2026 by **Nolan Willis***
+*Published on October 16, 2026 by **Nolan Willis***
 
 ## Welcome 
 
