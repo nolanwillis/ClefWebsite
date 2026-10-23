@@ -7,6 +7,14 @@
       "author": "Nolan Willis",
       "image": "assets/devlog_1.jpeg",
       "summary": "The first devlog of many."
+    },
+    {
+      "slug": "devlog_2",
+      "title": "Dev Log #2: Movement",
+      "date": "October 23, 2026",
+      "author": "Nolan Willis",
+      "image": "assets/devlog_2.png",
+      "summary": "Run. Run. Run."
     }
   ]
 }
