@@ -2,7 +2,7 @@
 
 *Published on October 30, 2026 by **Nolan Willis***
 
-The first milestone of the vertical slice is getting a basic encounter between the player and an enemy. So after movement, I started on the first two default abilities, slash and piano string, and built a very basic health component that can be used by the player and enemies.   
+The first major milestone of the vertical slice is getting a basic encounter between the player and an enemy. So after movement, I started on the first two default abilities, slash and piano string, and built a very basic health component that can be used by the player and enemies.   
 
 Admittedly, the first implementation of these items is crude. The abilities are just nodes slotted on the player with hard coded inputs. In the future, I’d like to implement an ability system, where swapping out abilities, rebinding keys, unlocks and energy costs are all taken into consideration. Health, however, is pretty much done (not including lives, respawning, etc).     
 
