@@ -1,18 +1,19 @@
-# Dev Log #4: Movment
+# Dev Log #4: Navigation
 
 *Published on November 6, 2026 by **Nolan Willis***
 
 Before going into this, it’s worth noting that this is by no means the most optimal or correct way to implement navigation in Godot for a platform based game. This is just what I came up with from watching YouTube videos, past game AI projects, and bouncing ideas off of Claude Code. It might need to be changed later, but right now it accomplishes the task of providing platform to platform navigation that is relatively easy to set up in the editor. 
 
 ## A very quick summary of A*
-A* or A Star Pathfinding algorithm that finds the shortest path between two vertices on a graph (CS graph not a Math graph).
+A* or A Star is a pathfinding algorithm that finds the shortest path between two vertices on a graph (CS graph of connected points).
 
 How it works: 
 1. A graph of connected vertices or points is created. 
 2. Given a start and end point, each point is assigned three cost values: G, H, and F. G is the cost to get from the start to the point. H is the optimistic cost to go from the point to the end. F is just G + H.
-3. Starting at the first point, it looks at the surrounding points and finds the one with the lowest F value. If two have the same F value, the point with the lowest H value is selected.            
-4. Move to the selected point.  
-5. Repeat steps 3 and 4 until the end point is reached. 
+3. Go to the first point.
+4. Looks at the surrounding points and finds the one with the lowest F value. If two have the same F value, the point with the lowest H value is selected.            
+5. Move to the selected point.  
+6. Repeat steps 4 and 5 until the end point is reached. 
 
 It’s easiest to think of this example as a grid of squares, where the costs are based on the number of squares between points. This is a very simple explanation with some details missing, there are also different variations of A*.
 
