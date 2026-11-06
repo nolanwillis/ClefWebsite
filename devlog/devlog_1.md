@@ -10,7 +10,7 @@ The job market for entry level software engineers is virtually non-existent. Now
 
 ## What would you do with ten years left? 
 
-My bitter sweet, fuck you answer to this question, an answer I’ve heard more times I care to count, is you make the best of it. True, there are other computer based jobs, but the ones I’m qualified for don’t interest me in the slightest and not using the education I worked so hard to get would be a complete waste.            
+My bitter sweet answer to this question, an answer I find annoying, is that you make the best of it. True, there are other computer based jobs, but the ones I’m qualified for don’t interest me in the slightest and not using the education I worked so hard to get would be a complete waste.            
 
 As of writing, it is October 13th 2026, 3:24 pm. At 10:00 am this morning I was supposed to have a job interview with a small indie studio. After spending thirty hours last week making a demo, writing a one page summary of the demo, and diligently preparing for the interview, it was cancelled at 4 am this morning with no explanation. I expect this level of unprofessionalism from larger studios, but not from smaller ones that I applied to with an open application email, which clearly depicted my skills via a resume and thoughtful letter.
 

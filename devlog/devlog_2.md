@@ -57,7 +57,7 @@ Wall shape Casts
 
 ## States, States, and more States 
 
-You could attempt to implement movement using if statements and a single script, but it would end up being an indentation/ordering clusterfuck, that will be impossible to debug in three weeks when you completely forget how any of it was implemented in the first place. 
+You could attempt to implement movement using if statements and a single script, but it would end up being an indentation/ordering nightmare, that will be impossible to debug in three weeks when you completely forget how any of it was implemented in the first place. 
 
 Instead, I used the state pattern, which will be used in many other parts of the project down the road. To start I implemented a basic state interface. GDScript doesn't have interfaces like Java or C#, in fact this is more like an abstract class than an interface since the methods aren't strictly required to be implemented by children, but I digress, here it is: 
 
