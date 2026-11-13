@@ -31,6 +31,14 @@
       "author": "Nolan Willis",
       "image": "assets/devlog_4.jpg",
       "summary": "Not as bad as it seemed."
+    },
+    {
+      "slug": "devlog_5",
+      "title": "Dev Log #5: Behavior",
+      "date": "November 13, 2026",
+      "author": "Nolan Willis",
+      "image": "assets/devlog_5.png",
+      "summary": "Enemies can now actually do something."
     }
   ]
 }
