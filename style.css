@@ -62,7 +62,9 @@ background-color: #232120;
 color: #F4EFEB;
 padding: 1rem 1.25rem;
 border-radius: 0.375rem;
-overflow-x: auto;
+overflow: auto;
+line-height: 1.5;
+max-height: calc(50 * 1.5em + 2rem + 2px); /* 50 lines + padding + border */
 font-family: 'Fira Code', monospace;
 font-size: 0.875rem;
 margin: 1.5rem 0;

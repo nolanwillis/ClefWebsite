@@ -2,23 +2,23 @@
 
 *Published on November 20, 2026 by **Nolan Willis***
 
-One of the things I really like about Ori and the Blind Forest games is their terrain. It bends and curves like a real forest floor, supporting the natural, outdoorsy feel of the game. That’s not to say tile-based terrain is bad, in some games like Belmont's Curse or Dead Cells, having tile terrain works well with the locale of the levels — dungeons, castles, and streets instead of a mythical forest. For the musical biomes of Clef it makes sense to support both tile and polygon based terrain. 
+One of the things I really like about Ori and the Blind Forest games is their terrain. It bends and curves like a real forest floor, supporting the natural, outdoorsy feel of the game. That’s not to say tile-based terrain is bad, in some games like Belmont's Curse or Dead Cells, having tile-based terrain works well with the locale of the levels — dungeons, castles, and streets instead of a mythical forest. For the musical biomes of Clef it makes sense to support both tile and polygon based terrain. 
 
 The current list is tentative, only part of a biome would be built for a vertical slice:  
-Ivory Catacombs: classical, a gothic musical conservatory, tile based. 
-Rust-string woods: folk/country, an autumn-hued forest, polygon based.
-Weeping Delta: blues, a flooded shantytown/marsh, polygon based.
-Brass Labyrinth: jazz, a dark, 1920’s noir city district, tile based. 
-Decibel Foundries: rock, a jagged volcanic crater, polygon based. 
-Sequencer Spire: house/EDM, a high tech tower, tile based. 
+- Ivory Catacombs: classical, a gothic musical conservatory, tile-based. 
+- Rust-string woods: folk/country, an autumn-hued forest, polygon-based.
+- Weeping Delta: blues, a flooded shantytown/marsh, polygon-based.
+- Brass Labyrinth: jazz, a dark, 1920’s noir city district, tile-based. 
+- Decibel Foundries: rock, a jagged volcanic crater, polygon-based. 
+- Sequencer Spire: house/EDM, a high tech tower, tile-based. 
 
-It might make sense just use the polygon approach, since you can make flat rectangles with it just as well. For now though, the vertical slice will be in one of the more outdoor biomes, so there needs to be support for polygon based terrain. 
+It might make sense just use the polygon approach, since you can make flat rectangles with it just as well. For now though, the vertical slice will be in one of the outdoor biomes, so there needs to be support for polygon-based terrain. 
 
 ## What needs to change
 
-When starting out, flat rectangular platforms were used for testing, unfortunately using flat platforms hid some of the nuances that comes with polygon-based terrain. Two main things needed to be changed: 
-The players walk movement state and the move-to behavior both assume horizontal movement is across flat platforms. 
-The navigation system needs to rework NavPlatforms and any function that depends on the concept of levels.       
+When starting this project, flat rectangular platforms were used for testing and speed, unfortunately using flat platforms hid some of the nuances that comes with polygon-based terrain. Two main things needed to be changed: 
+- The players walk movement state and the move-to behavior both assume horizontal movement is across flat platforms. 
+- The navigation system needs to rework `NavPlatforms` and any function that depends on the concept of levels.       
 
 ## What is being added
 
@@ -28,7 +28,7 @@ A tool that takes a black and white image -- where filled in space is one color 
 
 Just to clarify, in this case movement speed is the desired x-component of the final velocity vector (ignoring signs here). For movement that feels good, it should remain consistent unless for a specific reason (knockback, slowdown fields, other special effects). 
 
-With flat ground horizontal movement is super easy, which is one of the reasons grid based approaches are used. If something needs to move left or right, the movement speed is multiplied by Vector2D.Right (1, 0) ) or Vector2D.Left (-1, 0) and that's the final velocity. However,  if the ground is on a slant, say at a 45 degree angle, the direction vector is (.71, .71), so multiplying movement speed by the direction vector no longer works.  
+With flat ground horizontal movement is super easy, which is one of the reasons grid based approaches are used. If something needs to move left or right, the movement speed is multiplied by `Vector2D.Right` (1, 0) or `Vector2D.Left` (-1, 0) and that's the final velocity. However,  if the ground is on a slant, say at a 45 degree angle, the direction vector is (.71, .71), so multiplying movement speed by the direction vector no longer works.  
 
 ![Why multiplying speed by direction wont work](../assets/devlog_6/movement_rework_1.png)
 
@@ -38,26 +38,26 @@ To solve this, the movement speed needs to be adjusted before multiplying by the
 
 ## Navigation
 
-Instead of NavPlatforms there will be NavPolylines with NavPoints at each vertex. In this new version, NavPoints are not automatically generated, this might be added in the future but it seemed more like a want than a need.  
+Instead of `NavPlatforms` there will be `NavPolylines` with `NavPoints` at each vertex. In this new version, `NavPoints` are not automatically generated, this might be added in the future but it seemed more like a want than a need.  
 
 ![NavPolyline drawing](../assets/devlog_6/nav_polyline.png)
 
-Navigation works almost exactly the same way, except the concept of platform levels is gone. The only place where it was used was in find_path(...), when finding the closest NavPoint to the start position. It would look  for the closest NavPoint on the same platform as the start position. If it couldn't find one, it would look for the closest NavPoint on the same platform level as the start position. This backup was only used if the start position was mid-air and too far to be considered on a platform.  It was replaced with the closest overall NavPoint. 
+Navigation works almost exactly the same way, except the concept of platform levels is gone. The only place where it was used was in `find_path(...)`, when finding the closest `NavPoint` to the start position. It would look  for the closest `NavPoint` on the same platform as the start position. If it couldn't find one, it would look for the closest `NavPoint` on the same platform level as the start position. This backup was only used if the start position was mid-air and too far to be considered on a platform.  It was replaced with the closest overall `NavPoint`. 
 
 ## Terrain System  
 
 How it works: 
 1. Take the pixels from a black/white image, create a bitmap of the same size. 
 2. Create two bitmaps: a filled bitmap, where solid pixels are turned on matching the pixels, and an empty bitmap which is the inverse. 
-3. Call opaque_to_polygon(...) on both.  
+3. Call `opaque_to_polygon(...)` on both.  
 4. Discard the segments from the empty bitmap that touch the edge of the bitmap. 
-5. Use the resulting segments to create a ConcavePolygonShape2D using the polygon segments.  
-6. Finally, create a CollisionShape2D, using the ConcavePolygonShape2D.
+5. Use the resulting segments to create a `ConcavePolygonShape2D` using the polygon segments.  
+6. Finally, create a `CollisionShape2D`, using the `ConcavePolygonShape2D`.
 
 ![Terrain generator bitmaps](../assets/devlog_6/terrain_collisions.png)
 
 Why two bitmaps?
-The problem with opaque_to_polygon(...) is that it only wraps the exterior of on blobs, if there is a hole on the inside of it will be ignored. Having two bitmaps solves this. If there isn’t terrain with holes — after all a cave can be made by combining multiple polygons — one bitmap would be fine. 
+The problem with `opaque_to_polygon(...)` is that it only wraps the exterior of on blobs, if there is a hole on the inside of it will be ignored. Having two bitmaps solves this. If there isn’t terrain with holes — after all a cave can be made by combining multiple polygons — one bitmap would be fine. 
 
 ### terrain_generator.gd
 The overview above skips some steps, like how to deal with nested holes (e.g. an island inside a cave), adding a 1 bit border to detect the segments to discard, how to draw the polygons, and saving it all into a scene. Below is the entire script, which has a bunch of comments that go into more detail. 
@@ -456,7 +456,7 @@ func _rightmost(loop: PackedVector2Array) -> Vector2:
 
 ```
 
-Conceptually the generator was much easier than I anticipated, the hard part was getting the proper segments, which was made significantly more complex by the nested holes. In hind sight I probably could’ve left it out, seeing how it might not be used and there are simple workarounds. Below is an example of a terrain image I imported into the game using the terrapin generator: 
+Conceptually the generator was much easier than I anticipated, the hard part was getting the proper segments, which was made significantly more complex by the nested holes. In hindsight I probably could’ve left it out, seeing how it might not be used and there are simple workarounds. Below is an example of a terrain image I imported into the game using the terrapin generator: 
 
 ![Terrain drawing](../assets/devlog_6/terrain_drawing.png)
 
