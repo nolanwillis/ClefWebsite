@@ -34,7 +34,7 @@ Games with movement in two dimensions have been around for a long time, there ar
 
 ## Character Setup
 
-![Player character setup](../assets/devlog_2_setup.png)
+![Player character setup](../assets/devlog_2/devlog_2_setup.png)
 
 This is the character setup I ended up with. Keep in mind this picture is not including the `CollisionShape2D` around the player, to prevent them from falling though the floor or going through walls. Here’s how each piece contributes to the movement features talked about above: 
 

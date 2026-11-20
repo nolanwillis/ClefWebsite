@@ -20,7 +20,7 @@ Since BTs update every frame, large trees, on thousands of enemies will definite
 
 ## Composite behaviors
 
-![Composite behavior graphic](../assets/composite_behaviors.png)
+![Composite behavior graphic](../assets/devlog_5/composite_behaviors.png)
 
 - An abstract subclass of Behavior that has an array of children behaviors.
 - The root behavior of the tree is always a composite behavior.  
@@ -276,7 +276,7 @@ It prevents future `_run(...)` calls from generating a new path if one has alrea
 
 ## Test Enemy Behavior Tree
 
-![Test enemy behavior tree drawing](../assets/test_enemy_bt.png)
+![Test enemy behavior tree drawing](../assets/devlog_5/test_enemy_bt.png)
 
 1. Checks if the agent is grounded, the target is in range of the attack, and the target is on the same platform, then activates the ground slam.
 2. If one of the slam checks fails, it moves to the parallel, which runs pursue while checking if the target is in aggro range. 

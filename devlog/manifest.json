@@ -5,7 +5,7 @@
       "title": "Dev Log #1: Start",
       "date": "October 16, 2026",
       "author": "Nolan Willis",
-      "image": "assets/devlog_1.jpeg",
+      "image": "assets/devlog_1/devlog_1.jpeg",
       "summary": "The first devlog of many."
     },
     {
@@ -13,7 +13,7 @@
       "title": "Dev Log #2: Movement",
       "date": "October 23, 2026",
       "author": "Nolan Willis",
-      "image": "assets/devlog_2.png",
+      "image": "assets/devlog_2/devlog_2.png",
       "summary": "Run. Run. Run."
     },
     {
@@ -21,7 +21,7 @@
       "title": "Dev Log #3: Default Abilites and Health",
       "date": "October 30, 2026",
       "author": "Nolan Willis",
-      "image": "assets/devlog_3.jpg",
+      "image": "assets/devlog_3/devlog_3.jpg",
       "summary": "I'm not copying Castlevania, I swear."
     },
     {
@@ -29,7 +29,7 @@
       "title": "Dev Log #4: Navigation",
       "date": "November 6, 2026",
       "author": "Nolan Willis",
-      "image": "assets/devlog_4.jpg",
+      "image": "assets/devlog_4/devlog_4.jpg",
       "summary": "Not as bad as it seemed."
     },
     {
@@ -37,8 +37,16 @@
       "title": "Dev Log #5: Behavior",
       "date": "November 13, 2026",
       "author": "Nolan Willis",
-      "image": "assets/devlog_5.png",
+      "image": "assets/devlog_5/devlog_5.png",
       "summary": "Enemies can now actually do something."
+    },
+    {
+      "slug": "devlog_6",
+      "title": "Dev Log #6: Terrain",
+      "date": "November 20, 2026",
+      "author": "Nolan Willis",
+      "image": "assets/devlog_6/devlog_6.jpg",
+      "summary": "The boring platforms are gone."
     }
   ]
 }

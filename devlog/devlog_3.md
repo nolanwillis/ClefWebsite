@@ -72,7 +72,7 @@ The interface exposed to other components is very clear. Instead of a single set
 
 The slash ability is really simple, it activates the circular collider of a hit box on the left or right side of the player. Before doing this, the concept of which direction the character is facing had to be added to the movement component, so slash knows which side to put the collider on. This was done by adding `facing` to the movement component, which remembers the last value of `move_input.x`. 
 
-![Slash sketch](../assets/slash.png)
+![Slash sketch](../assets/devlog_3/slash.png)
 
 ## Piano String 
 
@@ -101,7 +101,7 @@ The piano string has a state machine with five states.
   - `enter()`: set local time left variable to recharge_duration.
   - `process()`: subtract delta time from time left, if it's 0 go to idle.  
 
-![Piano string state machine](../assets/piano_string_state.png)
+![Piano string state machine](../assets/devlog_3/piano_string_state.png)
 
 Once the five states were outlined it was fairly easy to reason about the ability, the only challenge that remained was actually moving the player. For pulling, the math is easy: get the vector from the player to the target, normalize it to get the direction, then multiply the direction vector by pull speed to get the velocity. 
 
@@ -109,7 +109,7 @@ Easy right?
 
 Swinging, on the other hand, is harder. The player needs to move in a circle around the anchor point. Another way of saying this, is at every update, the player velocity should be tangential to the swing circle. 
 
-![Piano string swing](../assets/piano_string_swing.png)
+![Piano string swing](../assets/devlog_3/piano_string_swing.png)
 
 To do this, I got the vector from the anchor point to the player, in this case targetToPlayer. The target velocity, or tangential velocity (V') is perpendicular to targetToPlayer. To change the current velocity to the target velocity, I took the dot product of the current velocity vector, v, with the direction of targetToPlayer. This gives the amount that v, is in the direction of targetToPlayer, which needs to be removed. To do this, I multiplied the dot product by the direction of targetToPlayer, then subtracted that from the current velocity. Then all the was needed was to make sure the player stayed within the initial rope length, so they didn’t fall.   
 

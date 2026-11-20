@@ -42,7 +42,7 @@ This works great on a top down grid, but a 2D metroidvania is made up of platfor
 - `NavAgentStats`: navigation stats for the agent. 
 - `NavAStar`: a subclass of `AStar2D` with a time-based cost calculation. It’s also responsible for gathering and connecting all the NavPoints in the scene, and keeping track of all the NavPoints in an array.  
 
-![NavPlatform illustration](../assets/navplatforms.png)
+![NavPlatform illustration](../assets/devlog_4/navplatforms.png)
 
 ## How this works 
 1. NavPlatforms are added throughout the scene which contain two NavPoints (only one if the width is below a certain threshold). The NavPoints will shadow or sit on top of the “real” points created with `add_point(...)`. They share the same `id`, this is crucial. 
@@ -241,7 +241,7 @@ func can_traverse(a: Vector2, b: Vector2, link: NavLink) -> bool:
 
 `_trim_path(...)` was not covered above since it’s not strictly required. It solves a bug that can happen where the closest `NavPoint` to the agent is behind the agent, causing it to backtrack.
 
-![Backtracking problem example](../assets/backtracking_problem.png)
+![Backtracking problem example](../assets/devlog_4/backtracking_problem.png)
 
 In this example, the green agent is trying to get to the red end location. If the agent uses its location as the start location, `find_path(...)` will select the NavPoints drawn in orange as the path. Even though it would make more sense to make a path with just 2 and 3, the first NavPoint is always the one closest to the agent, which in this case is 1. So if the agent follows the path, it appears to backtrack to 1, then go to 2 and 3.  
 
